@@ -1,23 +1,25 @@
-/*
-Create and add a new div
-*/
-const container = document.querySelector(".container");
-
-function createNewSquare(rowElement = container) {
+function createNewSquare(container) {
   let newSquare = document.createElement("div");
   newSquare.classList.add("square");
-  rowElement.appendChild(newSquare);
+  container.appendChild(newSquare);
   return newSquare;
 }
 
-function createNewRow(numSquares) {
+function createNewRow(container, numSquares) {
   let newRow = document.createElement("div");
   newRow.classList.add("row");
   for (let i = 0; i < numSquares; i++) {
-    let newSquare = createNewSquare(newRow);
-    newSquare.style.marginLeft = "-1px";
+    createNewSquare(newRow);
   }
   container.appendChild(newRow);
+  return newRow;
 }
 
-createNewRow(16);
+function createGrid(container, numRows, numCols) {
+  for (let i = 0; i < numRows; i++) {
+    createNewRow(container, numCols);
+  }
+}
+
+const myContainer = document.querySelector(".container");
+createGrid(myContainer, 16, 16);

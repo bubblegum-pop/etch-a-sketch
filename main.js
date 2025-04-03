@@ -25,6 +25,21 @@ function removeAllChildren(element) {
   }
 }
 
+function fillSquares() {
+  let allSquares = document.querySelectorAll(".square");
+  allSquares.forEach(square => {
+    square.addEventListener("mouseover", e => {
+      e.target.classList.add("filled");
+    });
+  });
+}
+
+function createGrid(gridSize, container) {
+  for (let i = 0; i < gridSize; i++) {
+    createNewRow(gridSize, container);
+  }
+}
+
 const mainContainer = document.querySelector(".container");
 
 // Button
@@ -37,23 +52,10 @@ mainContainer.appendChild(gridSizeBtn);
 const gridContainer = document.createElement("div");
 gridContainer.classList.add("gridContainer");
 mainContainer.appendChild(gridContainer);
-/*
-// Create 16x16 grid
-for (let i = 0; i < 16; i++) {
-  createNewRow(16, gridContainer);
-}
-*/
-const allSquares = document.querySelectorAll(".square");
-allSquares.forEach(square => {
-  square.addEventListener("mouseover", e => {
-    e.target.classList.add("filled");
-  });
-});
 
 gridSizeBtn.addEventListener("click", () => {
   removeAllChildren(gridContainer);
   let gridSize = getGridSize();
-  for (let i = 0; i < gridSize; i++) {
-    createNewRow(gridSize, gridContainer);
-  }
+  createGrid(gridSize, gridContainer);
+  fillSquares();
 });

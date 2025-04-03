@@ -1,3 +1,10 @@
+function addBtn() {
+  const changeGridBtn = document.createElement("button");
+  changeGridBtn.classList.add("changeGridBtn");
+  changeGridBtn.textContent("Change grid size");
+  return changeGridBtn;
+}
+
 function createNewSquare(container) {
   let newSquare = document.createElement("div");
   newSquare.classList.add("square");
@@ -5,7 +12,7 @@ function createNewSquare(container) {
   return newSquare;
 }
 
-function createNewRow(container, numSquares) {
+function createNewRow(numSquares, container) {
   let newRow = document.createElement("div");
   newRow.classList.add("row");
   for (let i = 0; i < numSquares; i++) {
@@ -15,11 +22,23 @@ function createNewRow(container, numSquares) {
   return newRow;
 }
 
-function createGrid(container, numRows, numCols) {
-  for (let i = 0; i < numRows; i++) {
-    createNewRow(container, numCols);
+function createGrid(container) {
+  let squaresPerSide = parseInt(prompt("Enter the number of squares per side:"));
+  for (let i = 0; i < squaresPerSide; i++) {
+    createNewRow(squaresPerSide, container);
   }
 }
 
-const myContainer = document.querySelector(".container");
-createGrid(myContainer, 16, 16);
+const mainContainer = document.querySelector(".container");
+const gridContainer = document.createElement("div");
+gridContainer.classList.add("gridContainer");
+
+mainContainer.appendChild(gridContainer);
+createGrid(gridContainer);
+
+const allSquares = document.querySelectorAll(".square");
+allSquares.forEach(square => {
+  square.addEventListener("mouseover", e => {
+    e.target.classList.add("filled");
+  });
+});

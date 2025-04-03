@@ -1,11 +1,22 @@
-.container,
+.container {
+  padding: 10px;
+}
+
+.gridContainer,
 .row {
   display: flex;
 }
 
-.container {
+.gridContainer,
+.row,
+.square {
+  flex: 1;
+}
+
+.gridContainer {
   flex-direction: column;
-  padding: 10px;
+  width: 500px;
+  height: 500px;
 }
 
 .row {
@@ -14,7 +25,9 @@
 
 .square {
   border: 1px solid black;
-  height: 30px;
-  width: 30px;
   margin-left: -1px;
+}
+
+.filled {
+  background-color: palevioletred;
 }

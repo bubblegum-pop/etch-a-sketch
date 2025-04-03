@@ -15,6 +15,10 @@ function createNewRow(numSquares, container) {
   return newRow;
 }
 
+function getGridSize() {
+  return parseInt(prompt("Enter the number of squares per side:"));
+}
+
 const mainContainer = document.querySelector(".container");
 
 // Button

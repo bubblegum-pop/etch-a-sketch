@@ -23,7 +23,6 @@ gridSizeBtn.addEventListener("click", () => {
   fillSquares();
 });
 
-
 // Functions
 
 function createNewSquare(container) {

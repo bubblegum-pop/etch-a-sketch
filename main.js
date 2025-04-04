@@ -1,3 +1,31 @@
+const mainContainer = document.querySelector(".container");
+
+// Button
+const gridSizeBtn = document.createElement("button");
+gridSizeBtn.textContent = "Change grid size";
+gridSizeBtn.classList.add("gridSizeBtn");
+mainContainer.appendChild(gridSizeBtn);
+
+// Grid container
+const gridContainer = document.createElement("div");
+gridContainer.classList.add("gridContainer");
+mainContainer.appendChild(gridContainer);
+
+// Initial grid
+createGrid(16, gridContainer);
+fillSquares();
+
+gridSizeBtn.addEventListener("click", () => {
+  let currentGridSize = gridContainer.childElementCount;
+  removeAllChildren(gridContainer);
+  let gridSize = getGridSize(currentGridSize);
+  createGrid(gridSize, gridContainer);
+  fillSquares();
+});
+
+
+// Functions
+
 function createNewSquare(container) {
   let newSquare = document.createElement("div");
   newSquare.classList.add("square");
@@ -15,8 +43,18 @@ function createNewRow(numSquares, container) {
   return newRow;
 }
 
-function getGridSize() {
-  return parseInt(prompt("Enter the number of squares per side:"));
+function getGridSize(currentSize) {
+  let newSize;
+  while (true) {
+    newSize = parseInt(prompt("Enter the number of squares per side:"));
+    if (newSize > 100 || newSize <= 0) {
+      alert("Please enter a number between 1 and 100.")
+    } else break;
+  }
+  if (isNaN(newSize)) {
+    newSize = currentSize;
+  }
+  return newSize;
 }
 
 function removeAllChildren(element) {
@@ -39,23 +77,3 @@ function createGrid(gridSize, container) {
     createNewRow(gridSize, container);
   }
 }
-
-const mainContainer = document.querySelector(".container");
-
-// Button
-const gridSizeBtn = document.createElement("button");
-gridSizeBtn.textContent = "Change grid size";
-gridSizeBtn.classList.add("gridSizeBtn");
-mainContainer.appendChild(gridSizeBtn);
-
-// Grid container
-const gridContainer = document.createElement("div");
-gridContainer.classList.add("gridContainer");
-mainContainer.appendChild(gridContainer);
-
-gridSizeBtn.addEventListener("click", () => {
-  removeAllChildren(gridContainer);
-  let gridSize = getGridSize();
-  createGrid(gridSize, gridContainer);
-  fillSquares();
-});
